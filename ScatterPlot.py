@@ -238,13 +238,10 @@ def reader(filename):
 
 	ColumnArray = [Col1]
 
-	LettersArray = ['A',  'B',  'C',   'D',  'E',  'F',   'G',  'H',  'I',  'J',  'K',  'L',  'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
-			'ZA', 'ZB', 'ZC',  'ZD', 'ZE', 'ZF', 'ZG', 'ZH', 'ZI', 'ZJ', 'ZK', 'ZL', 'ZM', 'ZN']
-
-	AnswersArray = ['Less than a year',                        '1-2 years',                '2-5 years',                
-			'5-10 years',                     	   '10-15 years',              '15-20 years',	       
-			'15 years',               	           '1',			       '1-2',                                     
-			'2-5',                                     '5-10',                  	           
+	AnswersArray = ['Less than a year',                        '1-2 years',                
+			'2-5 years',               		   '5-10 years',               '10-15 years',              
+			'15-20 years',	       			   '15 years',                 '1',			       
+			'1-2',                                     '2-5',                      '5-10',                  	           
 			'6-10', 		                   '10-15',                    '11-15',                   
 			'15-20',	                           'More than 15',             '15',
 			'15', 			                   '20 or more years',         '0 %', 
@@ -264,6 +261,9 @@ def reader(filename):
 
 
 	for i in ColumnArray:
+
+		df_original[i] = df_original[i].str.replace('Under', ' Under')
+
 		for j in range(len(AnswersArray)):
 			df_original[i] = df_original[i].replace(AnswersArray[j], NumbersArray[j])
 

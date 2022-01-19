@@ -31,7 +31,7 @@ QuestionArray=(  '1. For how many years have you been a member of the CMS collab
                  '35. Would you (have) benefit(ted) from a CMS training programme for PhD supervisors?'
                  '36. If a CMS training programme for PhD supervisors were to be created, which of the following would you like for it to include? Multiple choices can be selected for this answer. If you would like to suggest an option not included, please provide it in the "other" field.'
                  '37. Which of the following do you feel would be helpful for supervisors to have access to? If you would like to contribute a suggestion, please add this by selecting the "other" field.'
-                 '38. This question is completely optional for you to answer, should you feel comfortable enough to do so. Please rate how has your mental health been since the COVID-19 pandemic began? '
+                 '38. This question is completely optional for you to answer, should you feel comfortable enough to do so. Please rate how has your mental health been since the COVID-19 pandemic began?'
                  '39. This question is completely optional for you to answer, should you feel comfortable enough to do so. Please rate the overall impact that your supervisory responsibilities had/have on your mental health?'
                  '40. This question is completely optional for you to answer, should you feel comfortable enough to do so.  On a typical day, how manageable is/was your workload while being a supervisor?')
 
