@@ -187,10 +187,6 @@ AxisLabelArray = ['CMS membership length',
 		  'Rating']
 
 
-print('len(QuestionArray) = ', len(QuestionArray))
-print('len(GraphTitleArray) = ', len(GraphTitleArray))
-print('len(PdfTitleArray) = ', len(PdfTitleArray))
-print('len(AxisLabelArray) = ', len(AxisLabelArray))
 
 counter = 1
 
@@ -215,7 +211,7 @@ for i in QuestionArray:
 	counter+=1
 
 
-#Setting the titles and labels for depending on the first column
+#Setting the titles and labels for depending on the second column
 for i in QuestionArray:
 	if Col2 == i:
 	
@@ -239,6 +235,37 @@ def reader(filename):
 
 	# Read the data file
 	df_original = pd.read_csv(filename)
+
+	ColumnArray = [Col1]
+
+	LettersArray = ['A',  'B',  'C',   'D',  'E',  'F',   'G',  'H',  'I',  'J',  'K',  'L',  'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
+			'ZA', 'ZB', 'ZC',  'ZD', 'ZE', 'ZF', 'ZG', 'ZH', 'ZI', 'ZJ', 'ZK', 'ZL', 'ZM', 'ZN']
+
+	AnswersArray = ['Less than a year',                        '1-2 years',                '2-5 years',                
+			'5-10 years',                     	   '10-15 years',              '15-20 years',	       
+			'15 years',               	           '1',			       '1-2',                                     
+			'2-5',                                     '5-10',                  	           
+			'6-10', 		                   '10-15',                    '11-15',                   
+			'15-20',	                           'More than 15',             '15',
+			'15', 			                   '20 or more years',         '0 %', 
+			'< 25 %',                                  '25-50 %',                  '50-75 %',                  
+			'75-100 %', 		                   '100 %',                    'At least twice a week',    
+			'At least two times per week',             'Once a week',              'Once every two weeks',     
+			'Once a month',	                           'Less often',               '< 30 minutes',             
+		        'More than 30 but less than 60 minutes',   'Between 1 to 2 hours',     'More than 2 hours',        
+		        'Completely the opposite',                 'Somewhat different',       'Somewhere in the middle',  
+			'Somewhat similar',                        'Exactly the same']
+
+
+	NumbersArray = []
+
+	for i in range(len(AnswersArray)):
+		NumbersArray.append(i)
+
+
+	for i in ColumnArray:
+		for j in range(len(AnswersArray)):
+			df_original[i] = df_original[i].replace(AnswersArray[j], NumbersArray[j])
 
 	# Sort by the two relevant columns
 	df = df_original.sort_values(by=[Col1, Col2])
@@ -272,8 +299,61 @@ def reader(filename):
 	where_are_NaNs = pd.isna(x)
 	x[where_are_NaNs] = "nan"
 
+	x_final = []
+	y_final = []
+
+	print(' ')
+	print('x = ', x)
+	print(' ')	
+
+
+	for i in range(len(x)):
+		
+		print('x[i] = ', x[i])
+		Num = 0
+
+		for j in NumbersArray:
+
+			print('j = ', j)
+
+			if x[i] == j or x[i] == '%d+' % j:
+
+				if x[i] == j:
+					k = j
+				elif x[i] == '%d+' % j:
+					k = '%d+' % j
+					k = k[:-1]
+
+				print('x[i] = k: ', x[i], '=', k)
+		
+				index = NumbersArray.index(int(k)) 
+
+				print('index = ', index)
+				print('AnswersArray[index] = ', AnswersArray[index])
+
+				x_final.append(AnswersArray[index])
+		
+				break
+	
+			else:
+				if Num == len(NumbersArray) - 1:
+					print('Num = ', Num)
+					print('len(NumbersArray) - 1 = ', len(NumbersArray) - 1)
+					x_final.append(str(x[i]))
+					break
+
+			Num+=1
+
+
+
+	print('x_final = ', x_final)
+	print('y = ', y)
+
+	print('len(x_final) = ', len(x_final))
+	print('len(y) = ', len(y))
+
 	# Make the plot
-	sc = plt.scatter(x, y, c=counts_new, cmap=matplotlib.cm.viridis, marker="s")	
+	sc = plt.scatter(x_final, y, c=counts_new, cmap=matplotlib.cm.viridis, marker="s")	
 
 	# Cosmetics
 	plt.title(GraphTitleStart + ' vs ' + GraphTitleEnd)
