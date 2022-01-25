@@ -363,7 +363,6 @@ def reader(filename):
 
 			else:
 				if Num == len(NumbersArray) - 1:
-					print(y[i], 'does not equal', j)
 					y_final.append(str(y[i]))
 					break
 
@@ -382,9 +381,6 @@ def reader(filename):
 		levels = np.linspace(0, 100, 11)
 		sc = plt.tricontourf(list(x), list(y), counts_new, levels=levels, extend='min')
 
-		print('list(x) = ', list(x))
-		print('x_final = ', x_final)
-
 		x_ints = []
 		y_ints = []
 		
@@ -395,7 +391,7 @@ def reader(filename):
 			y_ints.append(int(j))
 
 		plt.xticks(x_ints, x_final)
-		plt.yticks(y, y_final)
+		plt.yticks(y_ints, y_final)
 
 		OutputName = 'HeatMaps'
 
@@ -422,8 +418,10 @@ def reader(filename):
 		
 	os.chdir('Results_' + OutputName)
 	plt.savefig(pdf_name, bbox_inches='tight')
-	
+
+	print(' ')	
 	print('The file ', pdf_name, ' has been saved.')	
+	print(' ')
 
 
 if __name__ == '__main__':
